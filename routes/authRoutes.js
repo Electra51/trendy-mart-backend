@@ -8,7 +8,6 @@ import {
 import {
   getAllOrdersController,
   getOrdersController,
-  orderStatusController,
 } from "../controllers/orderController.js";
 import { isAdmin, requireSignIn } from "../middleware/authMiddleware.js";
 
@@ -39,19 +38,5 @@ router.get("/orders", requireSignIn, getOrdersController);
 
 //all orders
 router.get("/all-orders", requireSignIn, isAdmin, getAllOrdersController);
-
-// order status update
-router.put(
-  "/order-status/:orderId",
-  requireSignIn,
-  isAdmin,
-  orderStatusController
-);
-
-// router.get(
-//   "/get-promo-code-user",
-//   requireSignIn,
-//   promoCodeGetForUserController
-// );
 
 export default router;

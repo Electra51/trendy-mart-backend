@@ -1,35 +1,26 @@
 import express from "express";
-
 import {
   createProductController,
   deleteProductController,
   getProductController,
   getSingleProductController,
-  productPhotoController,
 } from "../controllers/productController.js";
-import formidable from "express-formidable";
 import { isAdmin, requireSignIn } from "../middleware/authMiddleware.js";
+import upload from "../config/multer.js";
+
 const router = express.Router();
 
-//product-create
+// create Product
 router.post(
   "/create-product",
   requireSignIn,
   isAdmin,
-  formidable(),
+  upload.single("photo"),
   createProductController
 );
 
-//get products
 router.get("/get-product", getProductController);
-
-//single product
 router.get("/get-product/:pid", getSingleProductController);
-
-//get photo
-router.get("/product-photo/:pid", productPhotoController);
-
-//delete rproduct
 router.delete("/delete-product/:pid", deleteProductController);
 
 export default router;

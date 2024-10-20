@@ -14,9 +14,9 @@ export const createProductController = async (req, res) => {
       countInStock,
       shipping_charge,
       discount,
-    } = req.fields;
+    } = req.body;
 
-    const { photo } = req.files;
+    const photo = req.file; // Access the uploaded file
 
     // Validate required fields
     if (!req.user) {
@@ -43,15 +43,11 @@ export const createProductController = async (req, res) => {
 
     // Create the product object
     const product = new productModel({
-      ...req.fields,
+      ...req.body,
       user: req.user._id, // Use the authenticated user's ID
       slug: slugify(name),
+      photo: photo.path, // Save the path to the uploaded image
     });
-
-    if (photo) {
-      product.photo.data = fs.readFileSync(photo.path);
-      product.photo.contentType = photo.type;
-    }
 
     await product.save();
     res.status(201).send({
@@ -74,7 +70,7 @@ export const getProductController = async (req, res) => {
   try {
     const products = await productModel
       .find({})
-      .select("-photo")
+
       .sort({ createdAt: -1 });
 
     res.status(200).send({

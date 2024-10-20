@@ -3,11 +3,22 @@ import orderModel from "../models/orderModel.js";
 export const OrderPlaceController = async (req, res) => {
   try {
     const { cart } = req.body;
+
+    // Log the cart to check its structure
+    console.log("cart", cart);
+
+    // Check if the cart contains valid product IDs
     const order = new orderModel({ products: cart, buyer: req.user._id });
+
+    // Save the order
     await order.save();
+
+    // Log the order to verify the structure before sending the response
+    console.log("Saved order", order);
+
     res.status(201).send({
       success: true,
-      message: "order Placed Successfully",
+      message: "Order Placed Successfully",
       order,
     });
   } catch (error) {
@@ -15,7 +26,7 @@ export const OrderPlaceController = async (req, res) => {
     res.status(500).send({
       success: false,
       error,
-      message: "Error in crearing product",
+      message: "Error in creating order",
     });
   }
 };
@@ -39,41 +50,20 @@ export const getOrdersController = async (req, res) => {
 };
 
 //orders get
+// orders get
 export const getAllOrdersController = async (req, res) => {
   try {
     const orders = await orderModel
       .find({})
       .populate("products", "-photo")
-      .populate("buyer", "name")
+      .populate("buyer", "name") // Change 'user' to 'buyer' here
       .sort({ createdAt: -1 });
     res.json(orders);
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Error WHile Geting Orders",
-      error,
-    });
-  }
-};
-
-//order status
-export const orderStatusController = async (req, res) => {
-  try {
-    const { orderId } = req.params;
-    const { status } = req.body;
-    console.log("first", orderId, status);
-    const orders = await orderModel.findByIdAndUpdate(
-      orderId,
-      { status },
-      { new: true }
-    );
-    res.json(orders);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      success: false,
-      message: "Error While Updateing Order",
+      message: "Error While Getting Orders",
       error,
     });
   }

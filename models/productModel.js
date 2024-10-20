@@ -1,55 +1,3 @@
-// import mongoose from "mongoose";
-
-// const productSchema = new mongoose.Schema(
-//   {
-//     name: {
-//       type: String,
-//       required: true,
-//     },
-//     slug: {
-//       type: String,
-//       required: true,
-//     },
-//     price: {
-//       type: Number,
-//       required: true,
-//     },
-//     discount: {
-//       type: Number,
-//       required: true,
-//     },
-
-//     quantity: {
-//       type: String,
-//       required: true,
-//     },
-//     description: {
-//       type: String,
-//       required: true,
-//     },
-//     photo: {
-//       data: Buffer,
-//       contentType: String,
-//     },
-//     category: {
-//       type: mongoose.ObjectId,
-//       ref: "Category",
-//       required: true,
-//     },
-//     shipping_charge: {
-//       type: Number,
-//       required: true,
-//     },
-
-//     active: {
-//       type: Boolean,
-//     },
-//   },
-//   { timestamps: true }
-// );
-
-// export default mongoose.model("products", productSchema);
-
 import mongoose from "mongoose";
 
 const reviewSchema = new mongoose.Schema(
@@ -75,21 +23,15 @@ const productSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "User",
+      ref: "user",
     },
     name: {
       type: String,
       required: true,
     },
     photo: {
-      data: {
-        type: Buffer,
-        required: true,
-      },
-      contentType: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      required: true,
     },
     shipping_charge: {
       type: Number,
@@ -101,7 +43,7 @@ const productSchema = new mongoose.Schema(
     },
     category: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
+      ref: "category",
       required: true,
     },
     description: {

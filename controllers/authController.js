@@ -5,7 +5,7 @@ import { comparePassword, hashPassword } from "../helpers/authHelper.js";
 export const registerController = async (req, res) => {
   try {
     const { name, email, phone, password } = req.body;
-    //validation
+
     if (!name) {
       return res.send({ message: "Name is Required" });
     }

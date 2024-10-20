@@ -8,7 +8,7 @@ import {
 
 const router = express.Router();
 
-//order payments
+//order pplace
 router.post("/order-place", requireSignIn, OrderPlaceController);
 
 //orders
