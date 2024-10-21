@@ -2,8 +2,6 @@ import fs from "fs";
 import slugify from "slugify";
 import productModel from "../models/productModel.js";
 
-// Create a new product
-// Create a new product
 export const createProductController = async (req, res) => {
   try {
     const {
@@ -16,9 +14,9 @@ export const createProductController = async (req, res) => {
       discount,
     } = req.body;
 
-    const photo = req.file; // Access the uploaded file
+    const photo = req.file; 
 
-    // Validate required fields
+
     if (!req.user) {
       return res.status(400).send({ error: "User is required" });
     }
@@ -41,12 +39,12 @@ export const createProductController = async (req, res) => {
         return res.status(400).send({ error: "Photo should be less than 2MB" });
     }
 
-    // Create the product object
+    //  the product object create
     const product = new productModel({
       ...req.body,
-      user: req.user._id, // Use the authenticated user's ID
+      user: req.user._id, 
       slug: slugify(name),
-      photo: photo.path, // Save the path to the uploaded image
+      photo: photo.path, 
     });
 
     await product.save();
