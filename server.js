@@ -1,5 +1,6 @@
 import express from "express";
 import colors from "colors";
+import path from "path";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import connectDB from "./config/db.js";
@@ -20,9 +21,10 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 // app.use(express.static("public"));
 app.use(morgan("dev"));
 // Serve static files
-app.use("/public", express.static("public"));
+// app.use("/public", express.static("public"));
 // Serve static files
-// app.use("/public/images", express.static("public"));
+app.use("/public", express.static(path.join("public")));
+
 app.get("/", (req, res) => {
   res.send("Welcome TrendyMart");
 });
