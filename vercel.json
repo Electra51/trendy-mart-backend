@@ -5,7 +5,10 @@
       "use": "@vercel/node"
     }
   ],
-  "static": {
-    "public/images": "public/images"
-  }
+  "routes": [
+    {
+      "src": "/public/images/(.*)",
+      "dest": "/public/images/$1"
+    }
+  ]
 }
