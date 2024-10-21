@@ -13,7 +13,8 @@ dotenv.config();
 //database
 connectDB();
 const app = express();
-
+// Use path.resolve to get the absolute path to the "public" directory
+const __dirname = path.resolve();
 //middleware
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
@@ -23,7 +24,9 @@ app.use(morgan("dev"));
 // Serve static files
 // app.use("/public", express.static("public"));
 // Serve static files
-app.use("/public", express.static(path.join("public")));
+
+// Serve static files from the "public" folder
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
   res.send("Welcome TrendyMart");
