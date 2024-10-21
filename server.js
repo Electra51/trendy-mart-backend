@@ -22,7 +22,7 @@ app.use(morgan("dev"));
 // Serve static files
 // app.use("/public", express.static("public"));
 // Serve static files
-app.use("/public", express.static("public"));
+app.use("/public/images", express.static("public"));
 app.get("/", (req, res) => {
   res.send("Welcome TrendyMart");
 });
