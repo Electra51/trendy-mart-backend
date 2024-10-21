@@ -18,7 +18,7 @@ export const registerController = async (req, res) => {
     if (!phone) {
       return res.send({ message: "Phone no is Required" });
     }
-    //check user
+
     const exisitingUser = await userModel.findOne({ email });
 
     //exisiting user
@@ -57,7 +57,7 @@ export const registerController = async (req, res) => {
 export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
-    // validation
+
     if (!email || !password) {
       return res.status(404).send({
         success: false,

@@ -8,13 +8,8 @@ import {
 
 const router = express.Router();
 
-//order pplace
 router.post("/order-place", requireSignIn, OrderPlaceController);
-
-//orders
 router.get("/orders", requireSignIn, getOrdersController);
-
-//all orders
 router.get("/all-orders", requireSignIn, isAdmin, getAllOrdersController);
 
 export default router;

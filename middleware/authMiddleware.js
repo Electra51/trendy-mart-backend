@@ -4,11 +4,11 @@ import userModel from "../models/userModel.js";
 // Protected Routes token-based
 export const requireSignIn = async (req, res, next) => {
   try {
-    // Extract token from the "Bearer <token>" format
+    // extract token from the "Bearer <token>" format
     const token =
       req.headers.authorization && req.headers.authorization.split(" ")[1];
 
-    // Verify the token
+    // verify the token
     const decode = JWT.verify(token, process.env.JWT_SECRET);
     req.user = decode;
     next();
@@ -21,7 +21,7 @@ export const requireSignIn = async (req, res, next) => {
   }
 };
 
-// Admin access
+// ddmin access
 export const isAdmin = async (req, res, next) => {
   try {
     const user = await userModel.findById(req.user._id);

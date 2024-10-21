@@ -14,8 +14,7 @@ export const createProductController = async (req, res) => {
       discount,
     } = req.body;
 
-    const photo = req.file; 
-
+    const photo = req.file;
 
     if (!req.user) {
       return res.status(400).send({ error: "User is required" });
@@ -42,9 +41,9 @@ export const createProductController = async (req, res) => {
     //  the product object create
     const product = new productModel({
       ...req.body,
-      user: req.user._id, 
+      user: req.user._id,
       slug: slugify(name),
-      photo: photo.path, 
+      photo: photo.path,
     });
 
     await product.save();
@@ -63,7 +62,7 @@ export const createProductController = async (req, res) => {
   }
 };
 
-// Get all products
+// get all products
 export const getProductController = async (req, res) => {
   try {
     const products = await productModel
@@ -86,7 +85,7 @@ export const getProductController = async (req, res) => {
   }
 };
 
-// Get single product by ID
+// get single product by ID
 export const getSingleProductController = async (req, res) => {
   try {
     const product = await productModel
@@ -113,7 +112,7 @@ export const getSingleProductController = async (req, res) => {
   }
 };
 
-// Get product photo
+// get product photo
 export const productPhotoController = async (req, res) => {
   try {
     const product = await productModel.findById(req.params.pid).select("photo");
@@ -135,7 +134,7 @@ export const productPhotoController = async (req, res) => {
   }
 };
 
-// Delete a product by ID
+// delete a product by ID
 export const deleteProductController = async (req, res) => {
   try {
     const product = await productModel.findById(req.params.pid);

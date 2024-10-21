@@ -13,8 +13,6 @@ router.post(
   isAdmin,
   createCategoryController
 );
-
-//get all category
 router.get("/get-category", categoryControlller);
 
 export default router;

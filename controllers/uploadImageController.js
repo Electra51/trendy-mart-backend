@@ -4,7 +4,7 @@ export const uploadImageController = async (req, res) => {
       return res.status(400).json({ message: "No file uploaded" });
     }
 
-    // Construct image URL
+    // construct image URL
     const imageUrl = `${
       process.env.BASE_URL || "http://localhost:8080"
     }/${req.file.path.replace("public", "")}`;
